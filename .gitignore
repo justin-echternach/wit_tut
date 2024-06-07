@@ -1,0 +1,11 @@
+# Compiled files
+/target/
+
+**/*.wasm
+**/*.cwasm
+
+# Rust build artifacts
+**/*.rs.bk
+
+# Generated files
+Cargo.lock

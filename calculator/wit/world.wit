@@ -1,0 +1,18 @@
+package tut:calculator@0.1.0;
+
+interface calculate {
+    enum op {
+        add,
+        mult,
+    }
+    eval-expression: func(op: op, x: u32, y: u32) -> u32;
+}
+
+world calculator {
+    export calculate;
+    import tut:adder/add@0.1.0;
+}
+
+world app {
+    import calculate;
+}

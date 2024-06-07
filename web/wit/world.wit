@@ -1,0 +1,12 @@
+package tut:web@0.1.0;
+
+interface iweb {
+    make-get-request: func(url: string) -> string;
+    make-post-request: func(url: string,body: string) -> string;
+}
+/// An example world for the component to target.
+world web {
+    //include wasi:http/proxy@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+    export iweb;
+}
