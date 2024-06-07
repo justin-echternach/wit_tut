@@ -4,7 +4,7 @@ These are my experiments with wasmtime, the wasm component model and wasi previe
 Specifically, I'm interested in creating wasm components that can make http requests.
 I created an App Host to do my experiments with the wasi http proxy.
 
-You could also use wasmtime serve and have your component handle an http request incoming and the use the outbound http request, but I wanted to be able to test the http request/response from the component itself.  This is what App Host is for.  I learned a lot about embedding wasmtime for a wasm component and http use case.
+You could also use wasmtime serve and have your component handle an http request incoming and then do an outbound http request, but I wanted to be able to test the http request/response from the component itself.  This is what App Host is for.  I learned a lot about embedding wasmtime for a wasm component and http use case. Specifically, setting up the wasi http proxy and running components dynamically.
 
 These are just my experiments for learning how to use wasmtime and the wasm component model.
 
