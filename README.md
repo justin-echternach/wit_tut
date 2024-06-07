@@ -17,9 +17,9 @@ chmod +x ./build.sh
 ## Testing components with App Host
 ```bash
 cd app_host
-cargo run -- "../web/target/wasm32-wasi/debug/web.wasm" "make-get-request" "https://dog.ceo/api/breeds/image/random"
+cargo run -- "../web.wasm" "make-get-request" "https://dog.ceo/api/breeds/image/random"
 
-cargo run -- "../web/target/wasm32-wasi/debug/web.wasm" "make-post-request" "https://httpbin.org/post" "{\"test_key\":\"test_value\", \"test_key2\":\"test_value2\"}"
+cargo run -- "../web.wasm" "make-post-request" "https://httpbin.org/post" "{\"test_key\":\"test_value\", \"test_key2\":\"test_value2\"}"
 
 cargo run -- "../composed.wasm" "eval-expression" mult 1 2
 cargo run -- "../composed.wasm" "eval-expression" add 1 2
