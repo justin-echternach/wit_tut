@@ -8,6 +8,8 @@ You could also use wasmtime serve and have your component handle an http request
 
 These are just my experiments for learning how to use wasmtime and the wasm component model.
 
+The outgoing-handler was based on an example from wasmCloud. https://github.com/wasmCloud/wasmCloud/tree/main/examples/rust/components/dog-fetcher
+
 ## Build the components
 ```bash
 chmod +x ./build.sh
