@@ -68,15 +68,16 @@ fn make_json_http_request(url: &str, method: &Method, json_body: Option<&str>, h
 
 fn make_http_request(url: &str, method: &Method, body: Option<&[u8]>, headers: Option<Fields>) -> Result<String, String> {
     let headers = headers.unwrap_or_else(Fields::new);
-    let req = bindings::wasi::http::outgoing_handler::OutgoingRequest::new(headers);
+    
     let (scheme, domain, path_and_query) = parse_url(url).unwrap();
     let scheme = parse_scheme(&scheme);
+
+    let req = bindings::wasi::http::outgoing_handler::OutgoingRequest::new(headers);
     req.set_scheme(Some(&scheme)).unwrap();
-    req.set_authority(Some(domain.as_str())).unwrap(); // Modify to extract authority from URL
-    req.set_path_with_query(Some(path_and_query.as_str())).unwrap();
-    //req.set_method(&bindings::wasi::http::types::Method::Other(method.to_string())).unwrap();
+    req.set_authority(Some(domain.as_str())).unwrap();
+    req.set_path_with_query(Some(path_and_query.as_str())).unwrap();    
     req.set_method(&method).unwrap();
-    println!("Request Method {:?}", req.method());
+    
     if let Some(b) = body {
         let req_body = req.body().expect("failed getting outgoing body");
         write_outgoing_body(req_body, b).expect("failed writing outgoing body");
@@ -85,7 +86,6 @@ fn make_http_request(url: &str, method: &Method, body: Option<&[u8]>, headers: O
     match bindings::wasi::http::outgoing_handler::handle(req, None) {
         Ok(resp) => {
             resp.subscribe().block();
-            //println!("Response received ...{:?}", resp);
             let response: IncomingResponse = resp.get().unwrap().unwrap().unwrap();
             if response.status() == 200 {
                 let response_body = response.consume().unwrap();
@@ -110,9 +110,9 @@ fn parse_url(url: &str) -> Result<(String, String, String), String> {
 }
 
 fn parse_scheme(scheme: &str) -> Scheme {
-    match scheme {
-        "http" => Scheme::Http,
-        "https" => Scheme::Https,
+    match scheme.to_uppercase().as_str() {
+        "HTTP" => Scheme::Http,
+        "HTTPS" => Scheme::Https,
         _ => Scheme::Other(scheme.to_string()),
     }
 }

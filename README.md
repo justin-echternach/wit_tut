@@ -10,6 +10,8 @@ These are just my experiments for learning how to use wasmtime and the wasm comp
 
 The outgoing-handler was based on an example from wasmCloud. https://github.com/wasmCloud/wasmCloud/tree/main/examples/rust/components/dog-fetcher
 
+wasmCloud experiments coming next ...
+
 ## Build the components
 ```bash
 chmod +x ./build.sh
